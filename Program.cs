@@ -1,11 +1,11 @@
 ﻿using System.IO.IsolatedStorage;
+using Microsoft.VisualBasic;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        Program p = new Program();
-        p.Duckbear();
+        VariableShop();
 
         var a  = "Stress";
         //Console.WriteLine(a[3]);
@@ -16,6 +16,35 @@ internal class Program
             {
                 Console.WriteLine(item);
             }
+        }
+    }
+
+    public static void VariableShop()
+    {
+        // could use arraylist instead of List<obj>
+        List<object> AllTypes =
+        [
+            "String!",
+            1400000000,
+            32,
+            3.141592654f,
+            3.1415M,
+            2.718281828459,
+            'A',
+            true,
+            123456789L,
+            (short)16,
+            (byte)255,
+            (sbyte)-128,
+            1234567890123456789UL,
+            "This is an object!",
+        ];
+        
+        Console.WriteLine($"This is all 14 different types inside of C#");
+        
+        foreach (var item in AllTypes)
+        {
+            Console.WriteLine(item);
         }
     }
 
