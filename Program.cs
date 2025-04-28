@@ -13,6 +13,46 @@ public class Program
         //VariableShop();
         //Kings();
 
+        int number = 255;
+        int gap = BinaryGap(number);
+        Console.WriteLine($"Binary Gap of {number} is {gap}");
+    }
+
+    static int BinaryGap(int N)
+    {
+        string binary = Convert.ToString(N, 2);
+        Console.WriteLine($"Binary Representation of {N} is {binary}");
+
+        int maxGap = 0;
+        int currentGap = 0;
+        bool counting = false;
+
+        for (int i = 0; i < binary.Length; i++)
+        {
+            char bit = binary[i];
+            Console.WriteLine($"Bit {i} : {bit}");
+
+            if (bit == 1)
+            {
+                if (counting)
+                {
+                    Console.WriteLine($" Found closing '1' -> CurrentGap = {currentGap}");
+                    if (currentGap > maxGap)
+                    {
+                        Console.WriteLine($"Updating maxGap: {maxGap} -> {currentGap}");
+                        maxGap = currentGap;
+                    }
+                }
+                counting = true;
+                currentGap = 0;
+            }
+            else if (counting)
+            {
+                currentGap++;
+                Console.WriteLine($"Counting Zeros -> currentGap = {currentGap}");
+            }
+        }
+        return maxGap;
     }
 
     public static void VariableShop()
