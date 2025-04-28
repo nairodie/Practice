@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO.IsolatedStorage;
+using System.Runtime.Serialization;
 using Microsoft.VisualBasic;
 
 public class Program
@@ -8,18 +11,8 @@ public class Program
     {
         //Duckbear();
         //VariableShop();
-        Kings();
+        //Kings();
 
-        var a  = "Stress";
-        //Console.WriteLine(a[3]);
-
-        foreach(char item in a)
-        {
-            if (item.ToString() == "s" || item.ToString() == "S")
-            {
-                Console.WriteLine(item);
-            }
-        }
     }
 
     public static void VariableShop()
@@ -91,33 +84,33 @@ public class Program
 
         // Get the number of holdings for each player
         Console.WriteLine($"{player1}, Enter your Estate holdings (worth {estatePoints} point each):");
-        player1Estate = int.Parse(Console.ReadLine());
+        player1Estate = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player2}, Enter your Estate holdings (worth {estatePoints} point each):");
-        player2Estate = int.Parse(Console.ReadLine());
+        player2Estate = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player3}, Enter your Estate holdings (worth {estatePoints} point each):");
-        player3Estate = int.Parse(Console.ReadLine());
+        player3Estate = Convert.ToInt32(Console.ReadLine());
 
         // Get Duchy holdings
         Console.WriteLine($"{player1}, Enter your Duchy holdings (worth {duchyPoints} points each):");
-        player1Duchy = int.Parse(Console.ReadLine());
+        player1Duchy = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player2}, Enter your Duchy holdings (worth {duchyPoints} points each):");
-        player2Duchy = int.Parse(Console.ReadLine());
+        player2Duchy = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player3}, Enter your Duchy holdings (worth {duchyPoints} points each):");
-        player3Duchy = int.Parse(Console.ReadLine());
+        player3Duchy = Convert.ToInt32(Console.ReadLine());
 
         // Get Province holdings
         Console.WriteLine($"{player1}, Enter your Province holdings (worth {provincePoints} points each):");
-        player1Province = int.Parse(Console.ReadLine());
+        player1Province = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player2}, Enter your Province holdings (worth {provincePoints} points each):");
-        player2Province = int.Parse(Console.ReadLine());
+        player2Province = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"{player3}, Enter your Province holdings (worth {provincePoints} points each):");
-        player3Province = int.Parse(Console.ReadLine());
+        player3Province = Convert.ToInt32(Console.ReadLine());
 
         // Calculate total points for each player
         int totalPoints1 = (player1Estate * estatePoints) + (player1Duchy * duchyPoints) + (player1Province * provincePoints);
