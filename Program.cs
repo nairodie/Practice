@@ -1,9 +1,4 @@
 ﻿using System.Collections;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO.IsolatedStorage;
-using System.Runtime.Serialization;
-using Microsoft.VisualBasic;
 
 public class Program
 {
@@ -13,7 +8,13 @@ public class Program
         //VariableShop();
         //Kings();
 
-        int number = 255;
+        ArrayList DaysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        foreach (var day in DaysOfTheWeek)
+        {
+            Console.WriteLine(day);
+        }
+
+        int number = 529;
         int gap = BinaryGap(number);
         Console.WriteLine($"Binary Gap of {number} is {gap}");
     }
