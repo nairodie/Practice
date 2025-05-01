@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class Program
 {
@@ -8,11 +9,17 @@ public class Program
         //VariableShop();
         //Kings();
 
-        ArrayList DaysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-        foreach (var day in DaysOfTheWeek)
+        string name = "Stress";
+
+        //print only t
+        Console.WriteLine(name[1]);
+
+        //print each letter
+        foreach (char item in name)
         {
-            Console.WriteLine(day);
+            Console.WriteLine(item);
         }
+
 
         int number = 529;
         int gap = BinaryGap(number);
