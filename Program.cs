@@ -20,10 +20,31 @@ public class Program
             Console.WriteLine(item);
         }
 
-
         int number = 529;
         int gap = BinaryGap(number);
         Console.WriteLine($"Binary Gap of {number} is {gap}");
+
+        int[] array = new int[3];
+        array[0] = 1;
+        array[1] = 2;
+        array[3] = 3;
+        Display(array);
+
+        List<int> list = new List<int>();
+        list.Add(5);
+        list.Add(7);
+        list.Add(9);
+        Display(list);
+    }
+
+
+    static void Display(IList<int> list)
+    {
+        Console.WriteLine("Count: {0}", list.Count);
+        foreach (int item in list)
+        {
+            Console.WriteLine(item);
+        }
     }
 
     static int BinaryGap(int N)
