@@ -24,27 +24,57 @@ public class Program
         int gap = BinaryGap(number);
         Console.WriteLine($"Binary Gap of {number} is {gap}");
 
-        int[] array = new int[3];
-        array[0] = 1;
-        array[1] = 2;
-        array[3] = 3;
-        Display(array);
+        Console.WriteLine("Enter 5 space seperated integers");
+        string? line = Console.ReadLine();
 
-        List<int> list = new List<int>();
-        list.Add(5);
-        list.Add(7);
-        list.Add(9);
-        Display(list);
+        if (string.IsNullOrEmpty(line))
+        {
+            Console.WriteLine("No input");
+            return;
+        }
+
+        string[] input = line.Split(' ');
+        if (input.Length != 5)
+        {
+            Console.WriteLine("Please enter 5 integers only");
+            return;
+        }
+        int[] arr = new int[5];
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (!int.TryParse(input[i], out arr[i]))
+            {
+                Console.WriteLine($"Invalid number: {input[i]}");
+                return;
+            }
+        }
+        Texas(arr);
     }
 
-
-    static void Display(IList<int> list)
+    public static void Texas(int[] arr)
     {
-        Console.WriteLine("Count: {0}", list.Count);
-        foreach (int item in list)
+        long totalSum = 0;
+        int min = arr[0];
+        int max = arr[0];
+
+        for (int i = 0; i < arr.Length; i++)
         {
-            Console.WriteLine(item);
+            totalSum = totalSum + arr[i];
+
+            if (arr[i] < min)
+            {
+                min = arr[i];
+            }
+            if (arr[i] > max)
+            {
+                max = arr[i];
+            }
         }
+
+            long minSum = totalSum - max;
+            long maxSum = totalSum - min;
+
+            Console.WriteLine(minSum + " " + maxSum);
     }
 
     static int BinaryGap(int N)
