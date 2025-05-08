@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using System.IO.Pipes;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using Practice;
 
 public class Program
 {
@@ -9,69 +12,176 @@ public class Program
         //VariableShop();
         //Kings();
 
-        string name = "Stress";
+        ParkingBillCalc billCalc = new ParkingBillCalc();
+        Console.WriteLine(billCalc.Solution("10:00", "11:42"));
 
-        //print only t
-        Console.WriteLine(name[1]);
 
-        //print each letter
-        foreach (char item in name)
+        // int number = 529;
+        // int gap = BinaryGap(number);
+        // Console.WriteLine($"Binary Gap of {number} is {gap}");
+
+        // Console.WriteLine("Enter 5 space seperated integers");
+        // string? line = Console.ReadLine();
+
+        // if (string.IsNullOrEmpty(line))
+        // {
+        //     Console.WriteLine("No input");
+        //     return;
+        // }
+
+        // string[] input = line.Split(' ');
+        // if (input.Length != 5)
+        // {
+        //     Console.WriteLine("Please enter 5 integers only");
+        //     return;
+        // }
+        // int[] arr = new int[5];
+        // for (int i = 0; i < arr.Length; i++)
+        // {
+        //     if (!int.TryParse(input[i], out arr[i]))
+        //     {
+        //         Console.WriteLine($"Invalid number: {input[i]}");
+        //         return;
+        //     }
+        // }
+
+        Console.WriteLine(ReverseString("hello"));
+
+        Console.WriteLine(IsBalanced("({[]})")); //true
+        Console.WriteLine(IsBalanced("([)]")); //false
+
+    }
+
+    static bool IsBalanced(string input)
+    {
+        Stack<char> stack = new Stack<char>();
+
+        foreach(char c in input)
         {
-            Console.WriteLine(item);
-        }
-
-        int number = 529;
-        int gap = BinaryGap(number);
-        Console.WriteLine($"Binary Gap of {number} is {gap}");
-
-        Console.WriteLine("Enter 5 space seperated integers");
-        string? line = Console.ReadLine();
-
-        if (string.IsNullOrEmpty(line))
-        {
-            Console.WriteLine("No input");
-            return;
-        }
-
-        string[] input = line.Split(' ');
-        if (input.Length != 5)
-        {
-            Console.WriteLine("Please enter 5 integers only");
-            return;
-        }
-        int[] arr = new int[5];
-        for (int i = 0; i < arr.Length; i++)
-        {
-            if (!int.TryParse(input[i], out arr[i]))
+            if (c == '(' || c == '{' || c == '[')
             {
-                Console.WriteLine($"Invalid number: {input[i]}");
-                return;
+                stack.Push(c);
             }
+            else if (c == ')' || c == '}' || c == '[')
+            {
+                if (stack.Count == 0)
+                    return false;
+
+                char topOfStack = stack.Pop(); //get the last - remember LIFO
+                if (c == ')' && topOfStack != '(')
+                    return false;
+                if (c == '}' && topOfStack != '{')
+                    return false;
+                if (c == ']' && topOfStack != '[')
+                    return false;
+            }
+        }        
+        //if stack is empty, it's balanced
+        return stack.Count == 0;
+    }
+
+    static string ReverseString(string input)
+    {
+        Stack<char> stack = new Stack<char>();
+
+        //push all chars into stack
+        //use for loop when you want control otherwise use foreach as its easier to read
+        foreach(char c in input)
+        {
+            stack.Push(c);
+            Console.WriteLine(c);
         }
-        Texas(arr);
+
+        string reversed = "";
+        while (stack.Count > 0)
+        {
+            reversed = reversed + stack.Pop();
+        }
+        return reversed;
+    }
+
+    private void Stacks()
+    {
+        //LIFO - think of a plates as they stack
+        //constant time O(1) - very fast for all operations
+        Stack<string> stackString = new Stack<string>();
+        stackString.Push("A"); // push = add
+        stackString.Push("B");
+        stackString.Push("C");
+
+        Console.WriteLine(stackString.Peek()); //peek returns object at the top of the stack without removing it.
+
+        Console.WriteLine(stackString.Pop()); //pop = remove
+        Console.WriteLine(stackString.Pop());
+
+        Console.WriteLine($"String count is {stackString.Count}");
+
+    }
+
+    private static void DataStrucs()
+    {
+        //O(1) not resizing
+        int[] numberArray = [1, 2, 3, 4, 5];
+        Console.WriteLine(numberArray[0]);
+
+        //Dynamic array (think of ArrayList but has Type Safety)
+        List<string> nameString = new List<string>() {"Alice", "Bob"};
+        nameString.Add("Charlie");
+        nameString.Remove("Bob");
+
+        //doubly linked list - fast insert/remove but slow search
+        LinkedList<int> list = new LinkedList<int>();
+        list.AddLast(10);
+        list.AddFirst(5);
+
+        //LIFO - Push, Pop Peek
+        Stack<int> stack = new Stack<int>();
+        stack.Push(1);
+        stack.Push(2);
+        Console.WriteLine(stack.Pop());
+
+        //FIFO - Enqueue, Dequeue, Peek
+        Queue<string> queue = new Queue<string>();
+        queue.Enqueue("First");
+        queue.Enqueue("Second");
+        Console.WriteLine(queue.Dequeue());
+
+        //KVP(think Hashmap) - gold standard of generics
+        Dictionary<string, int> keyValuePairs = new Dictionary<string, int>();
+        keyValuePairs["Alice"] = 25;
+        Console.WriteLine(keyValuePairs["Alice"]); //will print out 25 - Dictionary<Tkey, TValue>
+
     }
 
     public static void Texas(int[] arr)
     {
+        //sum of all 5 numbers
         long totalSum = 0;
+        //track the smallest number
         int min = arr[0];
+        //track the largest number
         int max = arr[0];
 
+        //loop through each number in array
         for (int i = 0; i < arr.Length; i++)
         {
+            //adds current number to the total
             totalSum = totalSum + arr[i];
 
+            //updates min if current number is smaller
             if (arr[i] < min)
             {
                 min = arr[i];
             }
+            //updates max if current number is larger
             if (arr[i] > max)
             {
                 max = arr[i];
             }
         }
-
+            //sum of 4 smallest numbers
             long minSum = totalSum - max;
+            //sum of 4 largest numbers
             long maxSum = totalSum - min;
 
             Console.WriteLine(minSum + " " + maxSum);
@@ -235,5 +345,4 @@ public class Program
         {
             Console.WriteLine($"{player3} wins!");
         }
-    }
-}
+    }}
